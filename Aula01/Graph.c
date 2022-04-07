@@ -19,7 +19,7 @@ int **createGraph(int n){
         for(int j=i; j<n; j++){
             printf("e[%i][%i] = ", i+1, j+1);
             scanf("%i", &matrix[i][j]);
-            // Caso seja uma laço (em grafo não orientado): (à fazer)
+            // Caso seja uma laço (em grafo não orientado):
             if(i == j && matrix[i][j] == 1){
                 matrix[i][j] = 2;
             }
@@ -37,10 +37,19 @@ int degree(int i, int **matrix, int n){
     return g;
 }
 
+void printMatrix(int **matrix, int rows, int columns){
+    for(int i=0; i<rows; i++){
+        for(int j=0; j<columns; j++) printf("%i ", matrix[i][j]);
+        printf("\n");
+    }
+
+}
+
 int main(){
     int n = 0;
     scanf("%i", &n);
     int **matrix = createGraph(n);
+    printMatrix(matrix, n, n);
     for(int i=0; i<n; i++){
         printf("d(v[%i]) = %i\n", i+1, degree(i, matrix, n));
     }
