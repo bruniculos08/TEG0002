@@ -64,6 +64,17 @@ void verticesIsolados(int **matrix, int n){
     }
 }
 
+void verificaMaxV(int **matrix, int n){
+    int max;
+    for(int i=0; i<n; i++){
+        for(int j=n; j<n; j++){
+            if(i != j) max += 1;
+        }
+    }
+    if(max == n*(n-1)/2) printf("o numero de vertices esta de acordo com o teorema\n");
+    else printf("o numero de vertices nao esta de acordo com o teorema\n");
+}
+
 int main(){
     int n = 0;
     scanf("%i", &n);
