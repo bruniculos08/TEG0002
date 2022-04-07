@@ -16,9 +16,14 @@ int **createMatrix(int rows, int columns){
 int **createGraph(int n){
     int **matrix = createMatrix(n, n);
     for(int i=0; i<n; i++){
-        for(int j=0; j<n; j++){
-            printf("a[%i][%i] = ", i+1, j+1);
+        for(int j=i; j<n; j++){
+            printf("e[%i][%i] = ", i+1, j+1);
             scanf("%i", &matrix[i][j]);
+            // Caso seja uma laço (em grafo não orientado): (à fazer)
+            if(i == j && matrix[i][j] == 1){
+                matrix[i][j] = 2;
+            }
+            matrix[j][i] = matrix[i][j];
         }
     }
     return matrix;
@@ -37,6 +42,6 @@ int main(){
     scanf("%i", &n);
     int **matrix = createGraph(n);
     for(int i=0; i<n; i++){
-        printf("d(v[%i]) = %i\n", i, degree(i, matrix, n));
+        printf("d(v[%i]) = %i\n", i+1, degree(i, matrix, n));
     }
 }
