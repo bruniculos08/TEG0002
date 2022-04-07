@@ -42,7 +42,26 @@ void printMatrix(int **matrix, int rows, int columns){
         for(int j=0; j<columns; j++) printf("%i ", matrix[i][j]);
         printf("\n");
     }
+}
 
+void lacetes(int **matrix, int n){
+    for(int i=0; i<n; i++){
+        if(matrix[i][i] > 0) printf("lacete no vertice v[%i]\n", i);
+    }
+}
+
+void arestasMultiplas(int **matrix, int n){
+     for(int i=0; i<n; i++){
+        for(int j=i; j<n; j++){
+            if(matrix[i][j] > 1) printf("aresta multipla entre os vertices v[%i] e v[%i]\n", i, j);
+        }
+     }
+}
+
+void verticesIsolados(int **matrix, int n){
+    for(int i=0; i<n; i++){
+        if(degree(i, matrix, n) == 0) printf("v[%i] é um vertice isolado\n", i);
+    }
 }
 
 int main(){
