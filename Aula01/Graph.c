@@ -53,7 +53,7 @@ void lacetes(int **matrix, int n){
 void arestasMultiplas(int **matrix, int n){
      for(int i=0; i<n; i++){
         for(int j=i; j<n; j++){
-            if(matrix[i][j] > 1) printf("aresta multipla entre os vertices v[%i] e v[%i]\n", i, j);
+            if(matrix[i][j] > 1 && i != j) printf("aresta multipla entre os vertices v[%i] e v[%i]\n", i, j);
         }
      }
 }
@@ -64,15 +64,15 @@ void verticesIsolados(int **matrix, int n){
     }
 }
 
-void verificaMaxV(int **matrix, int n){
-    int max;
+void verificaMaxA(int **matrix, int n){
+    int max = 0;
     for(int i=0; i<n; i++){
-        for(int j=n; j<n; j++){
-            if(i != j) max += 1;
+        for(int j=i; j<n; j++){
+            if(i != j && i != j) max += 1;
         }
     }
-    if(max == n*(n-1)/2) printf("o numero de vertices esta de acordo com o teorema\n");
-    else printf("o numero de vertices nao esta de acordo com o teorema\n");
+    if(max == n*(n-1)/2) printf("o numero de arestas esta de acordo com o teorema\n");
+    else printf("o numero de arestas nao esta de acordo com o teorema\n");
 }
 
 int main(){
@@ -80,7 +80,33 @@ int main(){
     scanf("%i", &n);
     int **matrix = createGraph(n);
     printMatrix(matrix, n, n);
-    for(int i=0; i<n; i++){
-        printf("d(v[%i]) = %i\n", i+1, degree(i, matrix, n));
-    }
+    int p = 0;
+    do
+    {
+        scanf("%i", &p);
+        switch (p)
+        {
+        case 1:
+            lacetes(matrix, n);
+            break;
+        case 2:
+            for(int i = 0; i < n; i++){
+                printf("d(v[%i]) = %i\n", i+1, degree(i, matrix, n));
+            }
+            break;
+        case 3:
+            verticesIsolados(matrix, n);
+            break;
+        case 4:
+            verificaMaxV(matrix, n);
+            break;
+        case 5:
+            arestasMultiplas(matrix, n);
+            break;
+        default:
+            if(p != 0) printf("Opcao invalida\n");
+            break;
+        }
+    } while (p != 0);
+    
 }
