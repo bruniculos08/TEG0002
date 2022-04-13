@@ -2,10 +2,10 @@ typedef struct ListaDeAdjacencia listaDeAdjacencia;
 typedef struct ListaDeVertices listaDeVertices;
 struct ListaDeVertices{
     int indice;
-    listaDeVertices *next;
+    listaDeVertices *nextVertice;
 };
 struct ListaDeAdjacencia{
-    listaDeAdjacencia *next;
+    listaDeAdjacencia *nextLista;
     listaDeVertices *vertices;
 };
 int degree(int vertice, listaDeAdjacencia *lista);
