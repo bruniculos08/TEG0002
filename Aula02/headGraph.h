@@ -8,4 +8,5 @@ struct ListaDeAdjacencia{
     listaDeAdjacencia *next;
     listaDeVertices *vertices;
 };
-int grau(int vertice, listaDeAdjacencia *lista);
+int degree(int vertice, listaDeAdjacencia *lista);
+listaDeAdjacencia *createGraph
