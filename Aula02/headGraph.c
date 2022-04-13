@@ -12,13 +12,13 @@ listaDeAdjacencia *createGraph(){
     printf("Digite o numero de vertices: ");
     scanf("%i", &n);
     for(int i = 0; i < n; i++){
-        if(graph == NULL) graph = (listaDeAdjacencia *)malloc(sizeof(listaDeAdjacencia));
-        graph->vertices = NULL;
-        graph->next = NULL;
+        if(listaAux == NULL) listaAux = (listaDeAdjacencia *)malloc(sizeof(listaDeAdjacencia));
+        listaAux->vertices = NULL;
+        listaAux->next = NULL;
         printf("Digite o numero de vertices adjacentes ao vertice v[%i]: ", i+1);
         scanf("%i", &a);
         listaDeVertices *aux;
-        aux = graph->vertices;
+        aux = listaAux->vertices;
         for(int j = 0; j < a; j++){
             if(aux == NULL) aux = (listaDeVertices *)malloc(sizeof(listaDeVertices));
             aux->next = NULL;
@@ -26,6 +26,24 @@ listaDeAdjacencia *createGraph(){
             scanf("%i", &aux->indice);
             aux = aux->next;
         }
-        graph = graph->next;
+        listaAux = listaAux->next;
     }
+    return graph;
 }
+
+int degree(int k, listaDeAdjacencia *graph){
+    int result = 0;
+    listaDeAdjacencia *graphAux;
+    graphAux = graph;
+    for(int i = 0; i < k; i++){
+        graphAux = graphAux->next;
+        printf("Here");
+    }
+    listaDeVertices *aux = graphAux->vertices;
+    while(aux != NULL){
+        if(aux->indice = k) result += 2;
+        else result += 1;
+    }
+    return result;
+}
+

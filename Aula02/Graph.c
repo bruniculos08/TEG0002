@@ -4,4 +4,5 @@
 
 int main(){
     listaDeAdjacencia *graph = createGraph();
+    printf("%i\n", degree(1, graph));
 }
