@@ -20,6 +20,8 @@ listaDeAdjacencia *createGraph(listaDeAdjacencia *graph, int n){
                 verticesAux = (listaDeVertices *)malloc(sizeof(listaDeVertices));
                 verticesAux->nextVertice = NULL;
             }
+            printf("Digite o indice do vertice %i adjacente a v[%i]: ", j+1, i+1);
+            scanf("%i", &verticesAux->indice);
         }
     }
 }
