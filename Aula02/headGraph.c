@@ -43,6 +43,7 @@ listaDeAdjacencia *createRows(listaDeAdjacencia *Rows, int n){
             AuxRows = (listaDeAdjacencia *)malloc(sizeof(listaDeAdjacencia));
             AuxRows->nextLista = NULL;
             AuxRows->vertices = NULL;
+            printf("Here\n");
         }
         AuxRows = AuxRows->nextLista;
     }
