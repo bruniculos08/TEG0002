@@ -9,4 +9,6 @@ struct ListaDeAdjacencia{
     listaDeVertices *vertices;
 };
 int degree(int vertice, listaDeAdjacencia *lista);
-listaDeAdjacencia *createGraph();
+listaDeAdjacencia *createGraph(listaDeAdjacencia *graph, int n);
+listaDeAdjacencia *createRows(listaDeAdjacencia *Rows, int n);
+listaDeVertices *createColumns(listaDeVertices *Columns, int k, int v);

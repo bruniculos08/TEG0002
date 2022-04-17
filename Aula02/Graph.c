@@ -5,6 +5,6 @@
 int main(){
     listaDeAdjacencia *graph;
     graph = NULL;
-    graph = createGraph(graph);
+    graph = createGraph(graph, 2);
     printf("%i\n", degree(1, graph));
 }
