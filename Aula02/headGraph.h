@@ -4,3 +4,4 @@ struct Row{
     row *next;
 };
 row *createGraph(row *graph, int n);
+int degree(row *graph, int n);
