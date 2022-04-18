@@ -12,21 +12,25 @@ row *createGraph(row *graph, int n){
     row *AuxGraph;
     AuxGraph = graph;
     for(int i = 0; i < n; i++){
-        // 1. criando linha da matriz
+        // (1) criando linha da matriz:
         if(AuxGraph == NULL){
             AuxGraph = (row *)malloc(sizeof(row));
             AuxGraph->line = NULL;
             AuxGraph->next = NULL;
         }
+
+        // (2) criando vetor de tamanho m para a linha:
         int m;
         printf("Numero de vertices adjacentes ao vertice v[%i]: ", i+1);
         scanf("%i", &m);
         AuxGraph->line = (int *)malloc(sizeof(int)*m);
+
+        // (3) adicionando índices em cada item da linha:
         for(int j = 0; j < m; j++){
             printf("Indice do vertice adjacente %i: ", j);
             scanf("%i", &AuxGraph->line[j]);
-            printf("%i\n", AuxGraph->line[j]);
         }
+        AuxGraph = AuxGraph->next;
     }
     return graph;
 }
@@ -34,11 +38,9 @@ row *createGraph(row *graph, int n){
 int degree(row *graph, int index){
     row *AuxGraph;
     AuxGraph = graph;
-    printf("Here\n");
 
     // (1) Andar até a linha do vértice desejado:
     for(int i = 0; i < index-1; i++){
-        printf("Here 2\n");
         AuxGraph = AuxGraph->next;
     }
 
