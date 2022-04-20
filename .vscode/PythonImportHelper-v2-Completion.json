@@ -40,7 +40,7 @@
         "kind": 2,
         "importPath": "Aula03.Graph",
         "description": "Aula03.Graph",
-        "peekOfCode": "def plotGraph(graph):\n    G = nx.Graph()\n    n = len(graph)\n    for i in range(n):\n        for j in range(i, n):\n            if(graph[i][j]): G.add_edge(i, j)\n    nx.draw(G)\n    plt.show()\n    return\ndef main():",
+        "peekOfCode": "def plotGraph(graph):\n    G = nx.Graph()\n    # (1) \n    n = len(graph)\n    # (2) \n    for i in range(n):\n        for j in range(i, n):\n            if(graph[i][j]): G.add_edge(i, j)\n    nx.draw(G)\n    plt.show()",
         "detail": "Aula03.Graph",
         "documentation": {}
     },

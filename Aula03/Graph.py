@@ -41,7 +41,9 @@ def createGraph():
 
 def plotGraph(graph):
     G = nx.Graph()
+    # (1) 
     n = len(graph)
+    # (2) 
     for i in range(n):
         for j in range(i, n):
             if(graph[i][j]): G.add_edge(i, j)
@@ -52,5 +54,6 @@ def plotGraph(graph):
 def main():
     graph = createGraph()
     plotGraph(graph)
+    
 if __name__ == "__main__":
     main()
