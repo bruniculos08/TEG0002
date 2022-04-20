@@ -29,7 +29,7 @@ def createGraph():
             graph[i][j] = int(a)
             graph[j][i] = int(a)
 
-    # (8) printando cada uma das linhas da matriz (cada lista da lista de listas):
+    # (8) Printando cada uma das linhas da matriz (cada lista da lista de listas):
     for line in graph: print(line)
 
     # Obs.: tomar cuidado com a identação para o return da função.
