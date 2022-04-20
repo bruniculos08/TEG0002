@@ -1,0 +1,56 @@
+[
+    {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "networkx",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "networkx",
+        "description": "networkx",
+        "detail": "networkx",
+        "documentation": {}
+    },
+    {
+        "label": "createGraph",
+        "kind": 2,
+        "importPath": "Aula03.Graph",
+        "description": "Aula03.Graph",
+        "peekOfCode": "def createGraph():\n    n = int(input(\"Digite o número de vértices: \"))\n    # (1) Criar matriz n x n (que é nesse caso uma lista de listas):\n    graph = [[0 for x in range(n)] for y in range(n)]\n    # note que utilizamos um 'for' para gerar n linhas e que dentro destas linhas...\n    # ... utilizamos um 'for' para adicionar n 0's dentro de cada linha.\n    # (2) Andar pelas linhas da matriz (utilizando o 'for'):\n    for i in range(n):\n        # (3) Andar pelas colunas da matriz (utilizando o 'for'):\n        for j in range(i, n):",
+        "detail": "Aula03.Graph",
+        "documentation": {}
+    },
+    {
+        "label": "plotGraph",
+        "kind": 2,
+        "importPath": "Aula03.Graph",
+        "description": "Aula03.Graph",
+        "peekOfCode": "def plotGraph(graph):\n    G = nx.Graph()\n    n = len(graph)\n    for i in range(n):\n        for j in range(i, n):\n            if(graph[i][j]): G.add_edge(i, j)\n    nx.draw(G)\n    plt.show()\n    return\ndef main():",
+        "detail": "Aula03.Graph",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "Aula03.Graph",
+        "description": "Aula03.Graph",
+        "peekOfCode": "def main():\n    graph = createGraph()\n    plotGraph(graph)\nif __name__ == \"__main__\":\n    main()",
+        "detail": "Aula03.Graph",
+        "documentation": {}
+    }
+]

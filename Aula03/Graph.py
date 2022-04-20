@@ -1,3 +1,7 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import networkx as nx
+
 def createGraph():
     n = int(input("Digite o número de vértices: "))
 
@@ -35,7 +39,18 @@ def createGraph():
     # Obs.: tomar cuidado com a identação para o return da função.
     return graph
 
+def plotGraph(graph):
+    G = nx.Graph()
+    n = len(graph)
+    for i in range(n):
+        for j in range(i, n):
+            if(graph[i][j]): G.add_edge(i, j)
+    nx.draw(G)
+    plt.show()
+    return
+
 def main():
     graph = createGraph()
+    plotGraph(graph)
 if __name__ == "__main__":
     main()
