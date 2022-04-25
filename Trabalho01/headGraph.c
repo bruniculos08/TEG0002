@@ -21,23 +21,15 @@ int **createGraph(int n){
     // (1) Criando a matriz do grafo:
     int **matrix = createMatrix(n, n);
     printf("tamanho da matriz = %i\n", sizeof(matrix));
-    // (2) Percorrendo as linhas da matriz:
-    for(int i=0; i<n; i++){
-        // (3) Percorrendo as colunas da linha i:
-        for(int j=i; j<n; j++){
-
-            // (3.1) Mostra qual o vertice com índices de acordo com os vértices qual incide:
-            printf("e[%i][%i] = ", i+1, j+1);
-            scanf("%i", &matrix[i][j]);
-            matrix[j][i] = matrix[i][j];
-
-            // (3.2) Caso seja uma laço (em grafo não orientado):
-            while(i == j && matrix[i][j]%2 != 0){
-                printf("e[%i][%i] = ", i+1, j+1);
-                scanf("%i", &matrix[i][j]);
-            }
-        }
-    }
+    
+    int i = 0;
+    int j = 0;
+    // (2) Loop de acordo para inserir as arestas:
+    do
+    {
+      scanf("(%i, %i)", &i, &j);  
+    } while (i != 0 && j != 0);
+    
     return matrix;
 }
 
