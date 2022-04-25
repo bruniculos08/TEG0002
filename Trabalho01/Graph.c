@@ -3,8 +3,8 @@
 #include "headGraph.h"
 
 int main(){
-    int n = 0;
-    scanf("%i", &n);
+    int n;
+    //scanf("%i", &n);
     int **matrix = createGraph(n);
     printMatrix(matrix, n, n);
     int p = 0;

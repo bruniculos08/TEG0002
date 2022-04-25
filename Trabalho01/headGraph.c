@@ -20,6 +20,9 @@ int **createMatrix(int rows, int columns){
 }
 
 int **createGraph(int n){
+    FILE *filePointer;
+    filePointer = fopen("GraphInfo.txt", "rt");
+    fscanf(filePointer, "%i \n", &n); 
     
     // (1) Criando a matriz de adjacência do grafo:
     int **matrix = createMatrix(n, n);
@@ -29,8 +32,12 @@ int **createGraph(int n){
     do
     {
       // (2.1) Se não for utilizado fflush(stdin) ocorre bug:
-      fflush(stdin);
-      scanf("(%i, %i)", &i, &j);
+      //fflush(stdin);
+      //scanf("(%i, %i)", &i, &j);
+
+      // File
+      fscanf(filePointer, "(%i, %i) \n", &i, &j);
+
 
       // (2.2) Fim da inserção de arestas:
       if(i == -1 || j == -1 || i > n || j > n) break;
@@ -45,7 +52,7 @@ int **createGraph(int n){
           matrix[j-1][i-1] += 1;
       }
       
-    } while (i != -1 && j != -1);
+    } while (i != -1 && j != -1 && !feof(filePointer));
     
     return matrix;
 }
