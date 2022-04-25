@@ -20,7 +20,7 @@ int **createGraph(int n){
     
     // (1) Criando a matriz do grafo:
     int **matrix = createMatrix(n, n);
-
+    printf("tamanho da matriz = %i\n", sizeof(matrix));
     // (2) Percorrendo as linhas da matriz:
     for(int i=0; i<n; i++){
         // (3) Percorrendo as colunas da linha i:
