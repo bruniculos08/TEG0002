@@ -23,7 +23,7 @@ int **createGraph(int *n){
     FILE *filePointer;
     filePointer = fopen("GraphInfo.txt", "rt");
     fscanf(filePointer, "%i \n", n); 
-    printf("%i\n", *n);
+    //printf("%i\n", *n);
     
     // (1) Criando a matriz de adjacência do grafo:
     int **matrix = createMatrix(*n, *n);
@@ -79,7 +79,7 @@ void arestasMultiplas(int **matrix, int n){
 
 void verticesIsolados(int **matrix, int n){
     for(int i=0; i<n; i++){
-        if(degree(i, matrix, n) == 0) printf("v[%i] é um vertice isolado.\n", i);
+        if(degree(i, matrix, n) == 0) printf("v[%i] é um vertice isolado.\n", i+1);
     }
 }
 
@@ -92,4 +92,30 @@ void verificaMaxV(int **matrix, int n){
     }
     if(max == n*(n-1)/2) printf("O numero de arestas esta de acordo com o teorema.\n");
     else printf("O numero de arestas nao esta de acordo com o teorema.\n");
+}
+
+void numArestas(int **matrix, int n){
+  int arestas = 0;
+  
+  for(int i = 0; i < n; i++){
+    for(int j = 0; j < n; j ++){
+      if (i >= j)
+        if (matrix[i][j] != 0)
+          arestas ++;
+    }
+  }
+
+  printf("\nNúmero de Arestas: %i\n",arestas);
+}
+
+void somatorioGraus(int **matrix, int n){
+  int somatorio = 0;
+  
+  for(int i = 0; i < n; i++){
+    for(int j = 0; j < n; j++){
+      if(i == j) somatorio += 2*(matrix[i][j]);
+      else somatorio += matrix[i][j];
+    }
+  }
+  printf("\nSomatório dos graus da matriz: %i\n",somatorio);
 }

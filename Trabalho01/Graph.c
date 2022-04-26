@@ -5,10 +5,10 @@
 int main(){
     int n;
     int **matrix = createGraph(&n);
-    printMatrix(matrix, n, n);
     int p;
       do {
         do{
+          p = 0;
           printf("\n[1]: Imprimir matriz de adjacências");
           printf("\n[2]: Verificar Laços");
           printf("\n[3]: Verificar Grau de cada vértice");
@@ -18,9 +18,9 @@ int main(){
           printf("\n[7]: Exibir número de nós e arestas");
           printf("\n[8]: Exibir soma de todos os graus dos vértices");
           printf("\n[0]: Sair\n\n");
+          fflush(stdin);
           scanf("%i", &p);
         }while(p < 0 || p > 8);
-          
           switch (p)
           {
           case 1:
@@ -47,14 +47,17 @@ int main(){
               printf("\n");
               break;
           case 7:
-            printf("Número de nós: %i",n);
-            //numArestas(matrix, n);
+            printf("Número de nós: %i", n);
+            numArestas(matrix, n);
             break;  
           case 8:
-            //somatorioGraus(matrix, n);
+            somatorioGraus(matrix, n);
+            break;
+          default:
             break;
           }
           fflush(stdin);
       } while (p != 0);
+      
   printf("\nObrigado por usar nosso programa !!\n");
 }

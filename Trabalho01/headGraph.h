@@ -6,3 +6,5 @@ void lacetes(int **matrix, int n);
 void arestasMultiplas(int **matrix, int n);
 void verticesIsolados(int **matrix, int n);
 void verificaMaxV(int **matrix, int n);
+void numArestas(int **matrix, int n);
+void somatorioGraus(int **matrix, int n);
