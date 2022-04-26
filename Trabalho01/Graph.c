@@ -4,8 +4,7 @@
 
 int main(){
     int n;
-    //scanf("%i", &n);
-    int **matrix = createGraph(n);
+    int **matrix = createGraph(&n);
     printMatrix(matrix, n, n);
     int p = 0;
     do
