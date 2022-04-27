@@ -33,7 +33,7 @@ int **createGraph(int *n){
     do
     {
       // (2.1) Ler linha de aresta e pular para a próxima linha do arquivo:
-      fscanf(filePointer, "(%i, %i) \n", &i, &j);
+      fscanf(filePointer, "%i %i \n", &i, &j);
 
       // (2.2) Há a adição nos elementos simétricos da matriz (tendo em vista que a matriz é simétrica):
       if(i != j){
@@ -43,11 +43,23 @@ int **createGraph(int *n){
       else matrix[i-1][j-1] += 1;
       
     } while (!feof(filePointer));
+    fclose(filePointer);
     return matrix;
 }
 
 void saveGraph(int **matrix, int n){
-    
+    remove("GraphInfo.txt");
+    FILE *filePointer;
+    filePointer = fopen("GraphInfo.txt", "w+");
+    fprintf(filePointer, "%i", n);
+    for(int i = 0; i < n; i++){
+        for(int j = i; j < n; j++){
+            for(int k = 0; k < matrix[i][j]; k++){
+                fprintf(filePointer, "\n%i %i", i+1, j+1);
+            }
+        }
+    }
+    fclose(filePointer);
 }
 
 int degree(int i, int **matrix, int n){

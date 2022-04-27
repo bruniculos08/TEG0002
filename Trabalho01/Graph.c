@@ -26,6 +26,7 @@ int main(){
           case 1:
             printf("\n");
               printMatrix(matrix, n, n);
+              //saveGraph(matrix, n);
               break;
           case 2:
               lacetes(matrix, n);
@@ -59,5 +60,6 @@ int main(){
           fflush(stdin);
       } while (p != 0);
       
+  saveGraph(matrix, n);
   printf("\nObrigado por usar nosso programa !!\n");
 }
