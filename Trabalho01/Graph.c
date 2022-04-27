@@ -47,7 +47,7 @@ int main(){
               printf("\n");
               break;
           case 7:
-            printf("Número de nós: %i", n);
+            printf("Número de nós: %i\n\n", n);
             numArestas(matrix, n);
             break;  
           case 8:

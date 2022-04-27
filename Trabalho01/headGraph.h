@@ -8,3 +8,4 @@ void verticesIsolados(int **matrix, int n);
 void verificaMaxV(int **matrix, int n);
 void numArestas(int **matrix, int n);
 void somatorioGraus(int **matrix, int n);
+void saveGraph(int **matrix, int n);

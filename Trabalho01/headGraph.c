@@ -46,6 +46,10 @@ int **createGraph(int *n){
     return matrix;
 }
 
+void saveGraph(int **matrix, int n){
+    
+}
+
 int degree(int i, int **matrix, int n){
     int g = 0;
     for(int j=0; j<n; j++){
@@ -98,10 +102,11 @@ void numArestas(int **matrix, int n){
   int arestas = 0;
   
   for(int i = 0; i < n; i++){
-    for(int j = 0; j < n; j ++){
-      if (i >= j)
-        if (matrix[i][j] != 0)
-          arestas ++;
+    for(int j = i; j < n; j ++){
+        if(i == j) arestas += 2*(matrix[i][j]);
+        else arestas += matrix[i][j];
+        for(int k = 0; k < matrix[i][j]; k++) printf("%i %i\n", i+1, j+1);
+        
     }
   }
 
