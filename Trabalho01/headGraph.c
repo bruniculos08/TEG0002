@@ -155,16 +155,24 @@ void somatorioGraus(int **matrix, int n){
   printf("\nSomatório dos graus da matriz: %i\n",somatorio);
 }
 
-int **removerVertice(int **matrix, int n, int indice){
-    int m = n - 1;
+int **removerVertice(int **matrix, int *n){
+    int m = (*n) - 1;
+    int indice;
+    printf("Digite o número do vértice que se deseja remover: ");
+    scanf("%i", &indice);
     int **newMatrix = createGraph(&m);
-    for(int i = 0, k = 0; i < n; i++ && k++){
-        if(i == indice) i++;
-        for(int j = 0, l = 0; j < n; j++ && l++){
-            if(j == indice) j++;
-            matrix[i][j] = matrix[k][l];
+    for(int i = 0, k = 0; i < *n; i++){
+        if(i == indice-1) i++;
+        printf("Here k = %i\n", k);
+        for(int j = 0, l = 0; j < *n; j++){
+            if(j == indice-1) j++;
+            newMatrix[k][l] = matrix[i][j];
+            printf("Here l = %i\n", newMatrix[k][l]);
+            l++;
         }
+        k++;
     }
+    *n = m;
     return newMatrix;
 }
 

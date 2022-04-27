@@ -15,4 +15,4 @@ void grafoSimples(int **matrix,int n);
 void grafoCompleto(int **matrix,int n);
 void saveGraph(int **matrix, int n);
 int **removerArestas(int **matrix, int n);
-int **removerVertice(int **matrix, int n, int indice);
+int **removerVertice(int **matrix, int *n);

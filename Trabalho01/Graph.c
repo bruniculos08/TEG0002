@@ -23,7 +23,8 @@ int main() {
       printf("\n[11]: Verificar se o grafo é simples");
       printf("\n[12]: Verificar se o grafo é completo");
       printf("\n[13]: Verificar se o grafo é regular");
-      printf("\n[14]: Remover uma aresta");
+      printf("\n[14]: Remover arestas");
+      printf("\n[15]: Remover um vértice");
       printf("\n[16]: Salvar grafo");
       printf("\n[0]: Sair\n\n");
       scanf("%i", &p);
@@ -81,6 +82,10 @@ int main() {
       break;
     case 14:
       matrix = removerArestas(matrix, n);
+      break;
+    case 15:
+      matrix = removerVertice(matrix, &n);
+      n--;
       break;
     case 16:
       saveGraph(matrix, n);
