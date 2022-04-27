@@ -157,14 +157,15 @@ void somatorioGraus(int **matrix, int n){
 
 int **removerVertice(int **matrix, int *n){
     int m = (*n) - 1;
+    printf("%i\n", m);
     int indice;
     printf("Digite o número do vértice que se deseja remover: ");
     scanf("%i", &indice);
     int **newMatrix = createGraph(&m);
-    for(int i = 0, k = 0; i < *n; i++){
+    for(int i = 0, k = 0; i < *n && k < m-1; i++){
         if(i == indice-1) i++;
         printf("Here k = %i\n", k);
-        for(int j = 0, l = 0; j < *n; j++){
+        for(int j = 0, l = 0; j < *n && l < m-1; j++){
             if(j == indice-1) j++;
             newMatrix[k][l] = matrix[i][j];
             printf("Here l = %i\n", newMatrix[k][l]);
@@ -172,7 +173,6 @@ int **removerVertice(int **matrix, int *n){
         }
         k++;
     }
-    *n = m;
     return newMatrix;
 }
 
