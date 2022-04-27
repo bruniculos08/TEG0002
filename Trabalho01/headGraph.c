@@ -79,24 +79,42 @@ void printMatrix(int **matrix, int rows, int columns){
 }
 
 void lacetes(int **matrix, int n){
+  int k = 0;
     // (1) Percorrer apenas na diagonal principal da matriz pois esses elementos representam possíveis arestas de laço:
     for(int i=0; i<n; i++){
-        if(matrix[i][i] > 0) printf("Um lacete ou mais no vertice v[%i]\n", i+1);
+        if(matrix[i][i] > 0){
+          printf("%i lacete(s) no vertice v[%i]\n", matrix[i][i], i+1);
+          k += matrix[i][i];
+        }
     }
+    if (k ==0) printf("Não há lacetes no grafo.\n");
+    else printf("Há %i lacete(s) no grafo.\n", k);
 }
 
 void arestasMultiplas(int **matrix, int n){
+     int k = 0;
      for(int i=0; i<n; i++){
         for(int j=i+1; j<n; j++){
-            if(matrix[i][j] > 1) printf("Uma aresta multipla ou mais entre os vertices v[%i] e v[%i].\n", i, j);
+            if(matrix[i][j] > 1){
+              printf("%i aresta múltipla entre os vértices v[%i] e v[%i].\n", matrix[i][j]-1, i+1, j+1);
+              k += matrix[i][j]-1;
+            }
         }
      }
+     if (k == 0) printf("Não há arestas múltiplas no grafo.\n");
+      else printf("Há %i aresta(s) multiplas no grafo.\n", k);
 }
 
 void verticesIsolados(int **matrix, int n){
+    int k = 0;
     for(int i=0; i<n; i++){
-        if(degree(i, matrix, n) == 0) printf("v[%i] é um vertice isolado.\n", i+1);
+        if(degree(i, matrix, n) == 0){
+          printf("v[%i] é um vertice isolado.\n", i+1);
+          k++;
+        }
     }
+    if(k == 0) printf("Não há vértices isolados no grafo.\n");
+    else printf("Há %i vértice(s) isolados no grafo.\n", k);
 }
 
 void verificaMaxV(int **matrix, int n){
@@ -112,7 +130,7 @@ void verificaMaxV(int **matrix, int n){
 
 void numArestas(int **matrix, int n){
   int arestas = 0;
-  
+  printf("Arestas:\n");
   for(int i = 0; i < n; i++){
     for(int j = i; j < n; j ++){
         if(i == j) arestas += 2*(matrix[i][j]);
@@ -135,4 +153,108 @@ void somatorioGraus(int **matrix, int n){
     }
   }
   printf("\nSomatório dos graus da matriz: %i\n",somatorio);
+}
+
+int **removerVertice(int **matrix, int n, int indice){
+    int m = n - 1;
+    int **newMatrix = createGraph(&m);
+    for(int i = 0, k = 0; i < n; i++ && k++){
+        if(i == indice) i++;
+        for(int j = 0, l = 0; j < n; j++ && l++){
+            if(j == indice) j++;
+            matrix[i][j] = matrix[k][l];
+        }
+    }
+    return newMatrix;
+}
+
+int **removerArestas(int **matrix, int n){
+    int r, i, j;
+    printf("Digite o número de arestas a serem removidas: ");
+    scanf("%i", &r);
+    for(int k = 0; k < r; k++){
+        printf("Digite uma aresta a ser removida: ");
+        do {
+            scanf("%i %i", &i, &j);
+        } while(i > n || j > n);
+        if(matrix[i-1][j-1] > 0) matrix[i-1][j-1] --;
+        matrix[j-1][i-1] = matrix[i-1][j-1];
+    }
+    return matrix;
+}
+
+void numVertGrauImpar(int **matrix, int n) {
+  int grauImpar = 0;
+  for (int i = 0; i < n; i++) {
+    if (degree(i, matrix, n) % 2 != 0)
+      grauImpar++;
+  }
+
+  printf("\nNúmero de vértices com grau ímpar: %i", grauImpar);
+  if (grauImpar % 2 == 0)
+    printf("\nO teorema é satisfeito !\n");
+  else
+    printf("\nO teorema não é satisfeito !\n");
+}
+
+void grafoSimples(int **matrix, int n) {
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      if (matrix[i][j] > 1) {
+        printf("\nO grafo não é simples !!\n");
+        return;
+      }
+    }
+  }
+  printf("\nO grafo é simples !!\n");
+}
+
+void grafoRegular(int **matrix, int n) {
+  for (int i = 0; i < n; i++) {
+
+    for (int j = 0; j < n; j++) {
+      if (degree(i, matrix, n) != degree(j, matrix, n)) {
+        printf("\nO grafo não é regular !!\n");
+        return;
+      }
+    }
+  }
+  printf("\nO grafo é regular !!\n");
+
+  for (int i = 0; i < n; i++) {
+    printf("Grau de v[%i] = %i\n", i + 1, degree(i, matrix, n));
+  }
+}
+
+void grafoCompleto(int **matrix, int n) {
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      if (i == j)
+        if (matrix[i][j] != 0) {
+          printf("\nO grafo não é completo !!\n");
+          return;
+        }
+      if (matrix[i][j] != 1 && i != j) {
+        printf("\nO grafo não é completo !!\n");
+        return;
+      }
+    }
+  }
+  printf("\nO grafo é completo !!\n");
+}
+
+void passeio(int **matrix, int n, int c) {
+
+  int i, aux;
+  for (int i = 0; i < n; i++) {
+    aux += degree(i, matrix, n);
+  }
+  if (aux == 0) {
+    printf("\nMatriz nula");
+  }
+  if (c <= aux) {
+    printf("\nO caminho é possível e não são repetidas as arestas\n");
+  } else {
+    printf("\nO caminho é possível se repetirem arestas\n");
+  }
 }
