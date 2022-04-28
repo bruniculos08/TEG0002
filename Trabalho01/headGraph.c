@@ -29,7 +29,7 @@ int **createGraph(int *n){
     int **matrix = createMatrix(*n, *n);
 
     if(feof(filePointer)) return matrix;
-    
+
     // (2) Loop de acordo para inserir as arestas:
     int i, j;
     do
@@ -116,7 +116,7 @@ void verticesIsolados(int **matrix, int n){
         }
     }
     if(k == 0) printf("Não há vértices isolados no grafo.\n");
-    else printf("Há %i vértice(s) isolados no grafo.\n", k);
+    else printf("Há %i vértice(s) isolado(s) no grafo.\n", k);
 }
 
 void verificaMaxV(int **matrix, int n){
