@@ -28,6 +28,8 @@ int **createGraph(int *n){
     // (1) Criando a matriz de adjacência do grafo:
     int **matrix = createMatrix(*n, *n);
 
+    if(feof(filePointer)) return matrix;
+    
     // (2) Loop de acordo para inserir as arestas:
     int i, j;
     do
