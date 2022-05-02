@@ -36,7 +36,7 @@ int main() {
       printMatrix(matrix, n, n);
       break;
     case 2:
-      lacetes(matrix, n);
+      loops(matrix, n);
       break;
     case 3:
       for (int i = 0; i < n; i++) {
@@ -45,23 +45,23 @@ int main() {
       fflush(stdin);
       break;
     case 4:
-      verticesIsolados(matrix, n);
+      isolatedVertices(matrix, n);
       break;
     case 5:
-      verificaMaxV(matrix, n);
+      maximumOfEdges(matrix, n);
       break;
     case 6:
-      arestasMultiplas(matrix, n);
+      multipleEdges(matrix, n);
       printf("\n");
       break;
     case 7:
-      numArestas(matrix, n);
+      numberOfEdges(matrix, n);
       break;
     case 8:
-      somatorioGraus(matrix, n);
+      degreeSum(matrix, n);
       break;
     case 9:
-      numVertGrauImpar(matrix, n);
+      handShake(matrix, n);
       break;
     case 10:
       printf("\nInsira o tamanho do passeio:\n");
@@ -69,22 +69,22 @@ int main() {
       if (c <= 0) {
         printf("\nCaminho nulo\n");
       }
-      passeio(matrix, n, c);
+      tour(matrix, n, c);
       break;
     case 11:
-      grafoSimples(matrix, n);
+      simpleGraph(matrix, n);
       break;
     case 12:
-      grafoCompleto(matrix, n);
+      completeGraph(matrix, n);
       break;
     case 13:
-      grafoRegular(matrix, n);
+      regularGraph(matrix, n);
       break;
     case 14:
-      matrix = removerArestas(matrix, n);
+      matrix = removeEdges(matrix, n);
       break;
     case 15:
-      matrix = removerVertice(matrix, &n);
+      matrix = removeVertice(matrix, &n);
       n--;
       break;
     case 16:

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "headGraph.h"
 
+// (0) Função para criar uma matriz qualquer:
 int **createMatrix(int rows, int columns){
 
     // (1) Alocando os ponteiros para as linhas da matriz:
@@ -19,6 +20,7 @@ int **createMatrix(int rows, int columns){
     return matrix;
 }
 
+// (1) Função para criar um grafo (utilizando a função "createMatrix"):
 int **createGraph(int *n){
     FILE *filePointer;
     filePointer = fopen("GraphInfo.txt", "rt");
@@ -49,6 +51,7 @@ int **createGraph(int *n){
     return matrix;
 }
 
+// (2) Função para salvar o grafo (atualmente sendo executado pelo programa) em um arquivo de texto:
 void saveGraph(int **matrix, int n){
     remove("GraphInfo.txt");
     FILE *filePointer;
@@ -64,6 +67,7 @@ void saveGraph(int **matrix, int n){
     fclose(filePointer);
 }
 
+// (3) Função para calcular o grau (número de arestas incidêntes) em um vértice:
 int degree(int i, int **matrix, int n){
     int g = 0;
     for(int j=0; j<n; j++){
@@ -73,6 +77,7 @@ int degree(int i, int **matrix, int n){
     return g;
 }
 
+// (4) Função para imprimir a matriz:
 void printMatrix(int **matrix, int rows, int columns){
     for(int i=0; i<rows; i++){
         for(int j=0; j<columns; j++) printf("%i ", matrix[i][j]);
@@ -80,7 +85,8 @@ void printMatrix(int **matrix, int rows, int columns){
     }
 }
 
-void lacetes(int **matrix, int n){
+// (5) Função para indicar a existência e quais são os lacetes no grafo:
+void loops(int **matrix, int n){
   int k = 0;
     // (1) Percorrer apenas na diagonal principal da matriz pois esses elementos representam possíveis arestas de laço:
     for(int i=0; i<n; i++){
@@ -93,7 +99,8 @@ void lacetes(int **matrix, int n){
     else printf("Há %i lacete(s) no grafo.\n", k);
 }
 
-void arestasMultiplas(int **matrix, int n){
+// (6) Função para indicar a existência e quais são as arestas multiplas no grafo:
+void multipleEdges(int **matrix, int n){
      int k = 0;
      for(int i=0; i<n; i++){
         for(int j=i+1; j<n; j++){
@@ -107,7 +114,8 @@ void arestasMultiplas(int **matrix, int n){
       else printf("Há %i aresta(s) multiplas no grafo.\n", k);
 }
 
-void verticesIsolados(int **matrix, int n){
+// (7) Função para indicar a existência e quais são os vértices isolados no grafo:
+void isolatedVertices(int **matrix, int n){
     int k = 0;
     for(int i=0; i<n; i++){
         if(degree(i, matrix, n) == 0){
@@ -119,7 +127,8 @@ void verticesIsolados(int **matrix, int n){
     else printf("Há %i vértice(s) isolado(s) no grafo.\n", k);
 }
 
-void verificaMaxV(int **matrix, int n){
+// (8) Função para verificar se o número máximo de vértices no grafo (considerando um garfo simples) condiz com a combinção dos n vértices, 2 à 2:
+void maximumOfEdges(int **matrix, int n){
     int max = 0;
     for(int i=0; i<n; i++){
         for(int j=i; j<n; j++){
@@ -130,7 +139,7 @@ void verificaMaxV(int **matrix, int n){
     else printf("O numero de arestas nao esta de acordo com o teorema.\n");
 }
 
-void numArestas(int **matrix, int n){
+void numberOfEdges(int **matrix, int n){
   int arestas = 0;
   printf("Arestas:\n");
   for(int i = 0; i < n; i++){
@@ -145,7 +154,7 @@ void numArestas(int **matrix, int n){
   printf("\nNúmero de Arestas: %i\n",arestas);
 }
 
-void somatorioGraus(int **matrix, int n){
+void degreeSum(int **matrix, int n){
   int somatorio = 0;
   
   for(int i = 0; i < n; i++){
@@ -157,7 +166,7 @@ void somatorioGraus(int **matrix, int n){
   printf("\nSomatório dos graus da matriz: %i\n",somatorio);
 }
 
-int **removerVertice(int **matrix, int *n){
+int **removeVertice(int **matrix, int *n){
     int m = (*n) - 1;
     int indice;
     printf("Digite o número do vértice que se deseja remover: ");
@@ -175,7 +184,7 @@ int **removerVertice(int **matrix, int *n){
     return newMatrix;
 }
 
-int **removerArestas(int **matrix, int n){
+int **removeEdges(int **matrix, int n){
     int r, i, j;
     printf("Digite o número de arestas a serem removidas: ");
     scanf("%i", &r);
@@ -190,7 +199,7 @@ int **removerArestas(int **matrix, int n){
     return matrix;
 }
 
-void numVertGrauImpar(int **matrix, int n) {
+void handShake(int **matrix, int n) {
   int grauImpar = 0;
   for (int i = 0; i < n; i++) {
     if (degree(i, matrix, n) % 2 != 0)
@@ -204,7 +213,7 @@ void numVertGrauImpar(int **matrix, int n) {
     printf("\nO teorema não é satisfeito !\n");
 }
 
-void grafoSimples(int **matrix, int n) {
+void simpleGraph(int **matrix, int n) {
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
       if (matrix[i][j] > 1) {
@@ -216,7 +225,7 @@ void grafoSimples(int **matrix, int n) {
   printf("\nO grafo é simples !!\n");
 }
 
-void grafoRegular(int **matrix, int n) {
+void regularGraph(int **matrix, int n) {
   for (int i = 0; i < n; i++) {
 
     for (int j = 0; j < n; j++) {
@@ -233,7 +242,7 @@ void grafoRegular(int **matrix, int n) {
   }
 }
 
-void grafoCompleto(int **matrix, int n) {
+void completeGraph(int **matrix, int n) {
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
       if (i == j)
@@ -250,7 +259,7 @@ void grafoCompleto(int **matrix, int n) {
   printf("\nO grafo é completo !!\n");
 }
 
-void passeio(int **matrix, int n, int c) {
+void tour(int **matrix, int n, int c) {
 
   int i, aux;
   for (int i = 0; i < n; i++) {
