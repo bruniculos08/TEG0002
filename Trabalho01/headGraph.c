@@ -139,6 +139,7 @@ void maximumOfEdges(int **matrix, int n){
     else printf("O numero de arestas nao esta de acordo com o teorema.\n");
 }
 
+// (9) Função para indicar o número de arestas grafo:
 void numberOfEdges(int **matrix, int n){
   int arestas = 0;
   printf("Arestas:\n");
@@ -154,6 +155,7 @@ void numberOfEdges(int **matrix, int n){
   printf("\nNúmero de Arestas: %i\n",arestas);
 }
 
+// (10) Função para indicar o resultado da soma dos graus de todos os vértices no grafo:
 void degreeSum(int **matrix, int n){
   int somatorio = 0;
   
@@ -166,6 +168,8 @@ void degreeSum(int **matrix, int n){
   printf("\nSomatório dos graus da matriz: %i\n",somatorio);
 }
 
+// (11) Função para remover um vértice (e por consequência todas as arestas ligadas ao mesmo) de um grafo:
+// - Pode se dizer que o grafo é transformado em um subgrafo induzido pelos vértices existentes anteriormente, exceto pelo vértice removido.
 int **removeVertice(int **matrix, int *n){
     int m = (*n) - 1;
     int indice;
@@ -184,6 +188,7 @@ int **removeVertice(int **matrix, int *n){
     return newMatrix;
 }
 
+// (12) Função para remover uma aresta do grafo:
 int **removeEdges(int **matrix, int n){
     int r, i, j;
     printf("Digite o número de arestas a serem removidas: ");
@@ -199,6 +204,8 @@ int **removeEdges(int **matrix, int n){
     return matrix;
 }
 
+// (13) Função para verificar se o teorema do aperto de mão ("hand shake theorem") é válido para o grafo em questão:
+// - Obviamente tal teorema sempre será válido (se não estiver há então algo de errado no código).
 void handShake(int **matrix, int n) {
   int grauImpar = 0;
   for (int i = 0; i < n; i++) {
@@ -213,6 +220,7 @@ void handShake(int **matrix, int n) {
     printf("\nO teorema não é satisfeito !\n");
 }
 
+// (14) Função para verificar se o grafo em execução é um grafo simples (sem laços e/ou arestas múltiplas):
 void simpleGraph(int **matrix, int n) {
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
@@ -225,6 +233,7 @@ void simpleGraph(int **matrix, int n) {
   printf("\nO grafo é simples !!\n");
 }
 
+// (15) Função para verificar se o grafo é regular, ou seja, se todos os vértices tem o mesmo grau:
 void regularGraph(int **matrix, int n) {
   for (int i = 0; i < n; i++) {
 
@@ -242,6 +251,8 @@ void regularGraph(int **matrix, int n) {
   }
 }
 
+// (16) Função para verificar se o grafo é completo, ou seja, se é (ou contém) um grafo simples (com o mesmo número de vértices)...
+// ... com o número máximo de arestas:
 void completeGraph(int **matrix, int n) {
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
@@ -259,6 +270,7 @@ void completeGraph(int **matrix, int n) {
   printf("\nO grafo é completo !!\n");
 }
 
+// (17) Função para indicar um passeio de comprimento k a partir de um vértice v no grafo:
 void tour(int **matrix, int n, int c) {
 
   int i, aux;

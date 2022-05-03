@@ -4,9 +4,7 @@
 
 int main() {
   int n = 0;
-
   int **matrix = createGraph(&n);
-  //printMatrix(matrix, n, n);
   int p, c;
   do {
     do {
