@@ -25,7 +25,6 @@ int **createGraph(int *n){
     FILE *filePointer;
     filePointer = fopen("GraphInfo.txt", "rt");
     fscanf(filePointer, "%i \n", n); 
-    //printf("%i\n", *n);
     
     // (1) Criando a matriz de adjacência do grafo:
     int **matrix = createMatrix(*n, *n);
@@ -118,7 +117,11 @@ void multipleEdges(int **matrix, int n){
 void isolatedVertices(int **matrix, int n){
     int k = 0;
     for(int i=0; i<n; i++){
-        if(degree(i, matrix, n) == 0){
+        int g = 0;
+        for(int j=0; j<n; j++){
+          if(matrix[i][j] > 0 && i != j) g++;
+        }
+        if(g == 0){
           printf("v[%i] é um vertice isolado.\n", i+1);
           k++;
         }
