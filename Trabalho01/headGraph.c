@@ -248,10 +248,6 @@ void regularGraph(int **matrix, int n) {
     }
   }
   printf("\nO grafo é regular !!\n");
-
-  for (int i = 0; i < n; i++) {
-    printf("Grau de v[%i] = %i\n", i + 1, degree(i, matrix, n));
-  }
 }
 
 // (16) Função para verificar se o grafo é completo, ou seja, se é (ou contém) um grafo simples (com o mesmo número de vértices)...

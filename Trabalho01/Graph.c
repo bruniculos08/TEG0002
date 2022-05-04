@@ -77,6 +77,7 @@ int main() {
       break;
     case 13:
       regularGraph(matrix, n);
+      for (int i = 0; i < n; i++) printf("Grau de v[%i] = %i\n", i + 1, degree(i, matrix, n));
       break;
     case 14:
       matrix = removeEdges(matrix, n);
