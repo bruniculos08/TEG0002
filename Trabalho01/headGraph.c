@@ -239,7 +239,6 @@ void simpleGraph(int **matrix, int n) {
 // (15) Função para verificar se o grafo é regular, ou seja, se todos os vértices tem o mesmo grau:
 void regularGraph(int **matrix, int n) {
   for (int i = 0; i < n; i++) {
-
     for (int j = 0; j < n; j++) {
       if (degree(i, matrix, n) != degree(j, matrix, n)) {
         printf("\nO grafo não é regular !!\n");
