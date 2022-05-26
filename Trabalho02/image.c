@@ -5,5 +5,5 @@
 int main(){
     int rows, cols;
     int **matrix = createMatrix();
-    printf("%i", matrix[0][0]);
+    printf("%i", matrix[1][1]);
 }
