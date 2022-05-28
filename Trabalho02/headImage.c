@@ -57,7 +57,9 @@ int **createRegister(){
 }
 
 void printMatrix(int **matrix){
+    printf("\n\n\n\n");
     for(int i=1; i<R-1; i++){
+        printf("                                          ");
         for(int j=1; j<C-1; j++) printf("%i ", matrix[i][j]);
         printf("\n");
     }
