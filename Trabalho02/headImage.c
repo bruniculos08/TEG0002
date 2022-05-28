@@ -56,18 +56,18 @@ int **createRegister(){
     return matrix;
 }
 
-void printMatrix(int **matrix, int rows, int cols){
-    for(int i=1; i<rows-1; i++){
-        for(int j=1; j<cols-1; j++) printf("%i ", matrix[i][j]);
+void printMatrix(int **matrix){
+    for(int i=1; i<R-1; i++){
+        for(int j=1; j<C-1; j++) printf("%i ", matrix[i][j]);
         printf("\n");
     }
 }
 
-int countComponents(int **matrix, int **registers, int rows, int cols){
+int countComponents(int **matrix, int **registers){
     int count = 0;
 
-    for(int i=0; i<rows; i++){
-        for(int j=0; j<cols; j++){
+    for(int i=0; i<R; i++){
+        for(int j=0; j<C; j++){
             // (1) Se o pixel atual ainda não foi marcado então este pixel faz parte de um novo componente: 
             if(matrix[i][j] == 1 && registers[i][j] == 0){
                 // (1.1) Chamar busca em profundidade para marcar todos os pixels deste componente:
@@ -82,7 +82,7 @@ int countComponents(int **matrix, int **registers, int rows, int cols){
 
 void deepSearch(int **matrix, int **registers, int row, int col){
     system("cls");
-    printMatrix(registers, R, C);
+    printMatrix(registers);
     usleep(500000);
     
 
