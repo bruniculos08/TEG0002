@@ -63,7 +63,7 @@ int countComponents(int **matrix, int **registers, int rows, int cols){
     for(int i=0; i<rows; i++){
         for(int j=0; j<cols; j++){
             if(matrix[i][j] == 1 && registers[i][j] == 0){
-                breathSearch(matrix, registers, i, j);
+                deepSearch(matrix, registers, i, j);
                 count++;
             } 
         }
@@ -71,5 +71,11 @@ int countComponents(int **matrix, int **registers, int rows, int cols){
     return count;
 }
 
-int breathSearch(int **matrix, int **registers, int row, int col){
+void deepSearch(int **matrix, int **registers, int row, int col){
+    if(matrix[row][col] == 1) registers[row][col] = 1; 
+    else return;
+    deepSearch(matrix, registers, row+1, col);
+    deepSearch(matrix, registers, row-1, col);
+    deepSearch(matrix, registers, row, col-1);
+    deepSearch(matrix, registers, row, col+1);
 }
