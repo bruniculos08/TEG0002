@@ -30,7 +30,7 @@ int **createMatrix(int *mainRows, int *mainCols){
     fclose(filePointer);
     *mainRows = rows;
     *mainCols = cols;
-    printMatrix(matrix, rows, cols);
+    printMatrix(matrix);
     return matrix;
 }
 
@@ -52,7 +52,7 @@ int **createRegister(){
     }
 
     printf("\n");
-    printMatrix(matrix, rows, cols);
+    printMatrix(matrix);
     return matrix;
 }
 

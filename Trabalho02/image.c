@@ -8,6 +8,6 @@ int main(){
     printf("\n");
     int **registers = createRegister();
     printf("\n");
-    printf("Componentes = %i\n", countComponents(matrix, registers, rows, cols));
+    printf("Componentes = %i\n", countComponents(matrix, registers));
 
 }
