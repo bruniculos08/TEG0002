@@ -59,10 +59,11 @@ void printMatrix(int **matrix, int rows, int cols){
 }
 
 int countComponents(int **matrix, int **registers, int rows, int cols){
-    int count;
+    int count = 0;
     for(int i=0; i<rows; i++){
         for(int j=0; j<cols; j++){
             if(matrix[i][j] == 1 && registers[i][j] == 0){
+                printf("Here:\n");
                 deepSearch(matrix, registers, i, j);
                 count++;
             } 
@@ -73,9 +74,11 @@ int countComponents(int **matrix, int **registers, int rows, int cols){
 
 void deepSearch(int **matrix, int **registers, int row, int col){
     if(matrix[row][col] == 1 && registers[row][col] == 0) registers[row][col] = 1; 
-    else if(matrix[row][col] == 0) return;
+    else if(matrix[row][col] == 0 || registers[row][col] == 1) return;
+    printf("%i %i\n", row, col);
     deepSearch(matrix, registers, row+1, col);
     deepSearch(matrix, registers, row-1, col);
     deepSearch(matrix, registers, row, col+1);
     deepSearch(matrix, registers, row, col-1);
+    return;
 }
