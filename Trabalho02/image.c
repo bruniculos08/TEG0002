@@ -4,6 +4,8 @@
 
 int main(){
     int rows, cols;
-    int **matrix = createMatrix();
-    printf("%i", matrix[1][1]);
+    int **matrix = createMatrix(&rows, &cols);
+    int **registers = createRegister();
+
+
 }
