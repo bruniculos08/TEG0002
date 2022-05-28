@@ -1,6 +1,9 @@
 #include "headImage.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <Windows.h>
+#include <string.h>
+#include <math.h>
 
 int **createMatrix(int *mainRows, int *mainCols){
     int rows, cols;
@@ -11,6 +14,8 @@ int **createMatrix(int *mainRows, int *mainCols){
 
     printf("%i rows, %i cols\n", rows, cols);
     rows+=2; cols+=2;
+    R = rows; C = cols;
+
 
     int **matrix = (int **)malloc(rows*sizeof(int*));
     for (int i = 0; i < rows; i++){
@@ -52,8 +57,8 @@ int **createRegister(){
 }
 
 void printMatrix(int **matrix, int rows, int cols){
-    for(int i=0; i<rows; i++){
-        for(int j=0; j<cols; j++) printf("%i ", matrix[i][j]);
+    for(int i=1; i<rows-1; i++){
+        for(int j=1; j<cols-1; j++) printf("%i ", matrix[i][j]);
         printf("\n");
     }
 }
@@ -76,6 +81,10 @@ int countComponents(int **matrix, int **registers, int rows, int cols){
 }
 
 void deepSearch(int **matrix, int **registers, int row, int col){
+    system("cls");
+    printMatrix(registers, R, C);
+    usleep(500000);
+    
 
     // (1) Se o pixel atual é um nó e ainda não foi visitado, registrar pixel atual como visitado.
     if(matrix[row][col] == 1 && registers[row][col] == 0) registers[row][col] = 1; 
