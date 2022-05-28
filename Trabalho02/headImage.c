@@ -60,11 +60,14 @@ void printMatrix(int **matrix, int rows, int cols){
 
 int countComponents(int **matrix, int **registers, int rows, int cols){
     int count = 0;
+
     for(int i=0; i<rows; i++){
         for(int j=0; j<cols; j++){
+            // (1) Se o pixel atual ainda não foi marcado então este pixel faz parte de um novo componente: 
             if(matrix[i][j] == 1 && registers[i][j] == 0){
-                printf("Here:\n");
+                // (1.1) Chamar busca em profundidade para marcar todos os pixels deste componente:
                 deepSearch(matrix, registers, i, j);
+                // (1.2) Adicionar 1 a quantidade de componentes encontrados:
                 count++;
             } 
         }
@@ -73,12 +76,37 @@ int countComponents(int **matrix, int **registers, int rows, int cols){
 }
 
 void deepSearch(int **matrix, int **registers, int row, int col){
+
+    // (1) Se o pixel atual é um nó e ainda não foi visitado, registrar pixel atual como visitado.
     if(matrix[row][col] == 1 && registers[row][col] == 0) registers[row][col] = 1; 
-    else if(matrix[row][col] == 0 || registers[row][col] == 1) return;
-    printf("%i %i\n", row, col);
-    deepSearch(matrix, registers, row+1, col);
-    deepSearch(matrix, registers, row-1, col);
-    deepSearch(matrix, registers, row, col+1);
-    deepSearch(matrix, registers, row, col-1);
-    return;
+    
+    // (2) Se o pixel atual não é um nó ou já foi visitado não iniciar busca.
+    else if(matrix[row][col] == 0 || registers[row][col] == 1) return; 
+
+
+    deepSearch(matrix, registers, row+1, col); // Verifica pixel acima
+    deepSearch(matrix, registers, row-1, col); // Verifica pixel abaixo
+
+    deepSearch(matrix, registers, row, col+1); // Verifica pixel à direita
+    deepSearch(matrix, registers, row, col-1); // Verifica pixel à esquerda
+}
+
+void deepSearchEight(int **matrix, int **registers, int row, int col){
+
+    // (1) Se o pixel atual é um nó e ainda não foi visitado, registrar pixel atual como visitado.
+    if(matrix[row][col] == 1 && registers[row][col] == 0) registers[row][col] = 1; 
+    
+    // (2) Se o pixel atual não é um nó ou já foi visitado não iniciar busca.
+    else if(matrix[row][col] == 0 || registers[row][col] == 1) return; 
+    
+    deepSearchEight(matrix, registers, row+1, col); // Verifica pixel acima
+    deepSearchEight(matrix, registers, row-1, col); // Verifica pixel abaixo
+    
+    deepSearchEight(matrix, registers, row+1, col+1); // Verifica pixel canto superior direito
+    deepSearchEight(matrix, registers, row-1, col+1); // Verifica pixel canto inferior direito
+    deepSearchEight(matrix, registers, row+1, col-1); // Verifica pixel canto superior esquerdo
+    deepSearchEight(matrix, registers, row-1, col-1); // Verifica pixel canto inferior esquerdo
+    
+    deepSearchEight(matrix, registers, row, col+1); // Verifica pixel à direita
+    deepSearchEight(matrix, registers, row, col-1); // Verifica pixel à esquerda
 }
