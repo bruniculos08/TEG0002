@@ -72,10 +72,10 @@ int countComponents(int **matrix, int **registers, int rows, int cols){
 }
 
 void deepSearch(int **matrix, int **registers, int row, int col){
-    if(matrix[row][col] == 1) registers[row][col] = 1; 
-    else return;
+    if(matrix[row][col] == 1 && registers[row][col] == 0) registers[row][col] = 1; 
+    else if(matrix[row][col] == 0) return;
     deepSearch(matrix, registers, row+1, col);
     deepSearch(matrix, registers, row-1, col);
-    deepSearch(matrix, registers, row, col-1);
     deepSearch(matrix, registers, row, col+1);
+    deepSearch(matrix, registers, row, col-1);
 }
