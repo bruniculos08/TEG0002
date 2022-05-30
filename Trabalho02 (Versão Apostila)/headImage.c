@@ -68,33 +68,58 @@ void printMatrix(int **matrix){
     }
 }
 
+void printComponents(){
+    for(int i=0; i<count; i++){
+        printf("Componente: %i, Pixels = %i, Coordenadas baricentro: (%i, %i)\n", i+1, lista[i].numeroDePixels, lista[i].baricentroX, lista[i].baricentroY);
+    }
+}
+
 int countComponents(int **matrix, int **registers){
-    int count = 0;
+    count = 0; 
+    visitados = 0;
+    lista = NULL;
 
     for(int i=0; i<R; i++){
         for(int j=0; j<C; j++){
             // (1) Se o pixel atual ainda não foi marcado então este pixel faz parte de um novo componente: 
             if(matrix[i][j] == 1 && registers[i][j] == 0){
+                if(lista == NULL) lista = (componente *)malloc(sizeof(componente));
+                else lista = realloc(lista, sizeof(componente)*(count+1));
+                lista[count].baricentroX = 0;
+                lista[count].baricentroY = 0;
+                lista[count].numeroDePixels = 0;
+
                 // (1.1) Chamar busca em profundidade para marcar todos os pixels deste componente:
                 deepSearch(matrix, registers, i, j);
                 // (1.2) Adicionar 1 a quantidade de componentes encontrados:
+                
+
+                lista[count].baricentroX = lista[count].baricentroX/lista[count].numeroDePixels -1;
+                lista[count].baricentroY = lista[count].baricentroY/lista[count].numeroDePixels -1;
+
                 count++;
             } 
         }
     }
+    
     return count;
 }
 
 void deepSearch(int **matrix, int **registers, int row, int col){
-    system("cls");
-    printMatrix(registers);
-    usleep(90000);
+    
+    lista[count].baricentroX += col;
+    lista[count].baricentroY += row;
+    lista[count].numeroDePixels++;
 
     // (1) Se o pixel atual é um nó e ainda não foi visitado, registrar pixel atual como visitado.
     if(matrix[row][col] == 1 && registers[row][col] == 0){
         visitados++;
-        registers[row][col] = visitados;
-    } 
+        registers[row][col] = 1;
+    }
+
+    system("cls");
+    printMatrix(registers);
+    usleep(90000);
     
     // (2) Se o pixel atual não é um nó ou já foi visitado não iniciar busca.
     //else if(matrix[row][col] == 0 || registers[row][col] > 0) return; 

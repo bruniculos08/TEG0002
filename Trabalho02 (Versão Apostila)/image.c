@@ -10,5 +10,5 @@ int main(){
     int **registers = createRegister();
     printf("\n");
     printf("Componentes = %i\n", countComponents(matrix, registers));
-
+    printComponents();
 }
