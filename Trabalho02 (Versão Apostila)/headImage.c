@@ -60,7 +60,10 @@ void printMatrix(int **matrix){
     printf("\n\n\n\n");
     for(int i=1; i<R-1; i++){
         printf("                                          ");
-        for(int j=1; j<C-1; j++) printf("%i ", matrix[i][j]);
+        for(int j=1; j<C-1; j++){
+           if(matrix[i][j] == 0) printf("%i ", 0);
+           else printf("%i ", 1);
+        }
         printf("\n");
     }
 }
@@ -85,7 +88,10 @@ int countComponents(int **matrix, int **registers){
 void deepSearch(int **matrix, int **registers, int row, int col){
 
     // (1) Se o pixel atual é um nó e ainda não foi visitado, registrar pixel atual como visitado.
-    if(matrix[row][col] == 1 && registers[row][col] == 0) registers[row][col] = 1; 
+    if(matrix[row][col] == 1 && registers[row][col] == 0){
+        visitados++;
+        registers[row][col] = visitados;
+    } 
     
     // (2) Se o pixel atual não é um nó ou já foi visitado não iniciar busca.
     else if(matrix[row][col] == 0 || registers[row][col] > 0) return; 
@@ -94,11 +100,30 @@ void deepSearch(int **matrix, int **registers, int row, int col){
     printMatrix(registers);
     usleep(500000);
 
-    deepSearch(matrix, registers, row, col+1); // Verifica pixel à direita
-    deepSearch(matrix, registers, row, col-1); // Verifica pixel à esquerda
+    if(matrix[row][col+1] == 1 && registers[row][col+1] == 0){
+        visitados++;
+        registers[row][col+1] = visitados;
+        deepSearch(matrix, registers, row, col+1); // Verifica pixel à direita
+    }
 
-    deepSearch(matrix, registers, row+1, col); // Verifica pixel acima
-    deepSearch(matrix, registers, row-1, col); // Verifica pixel abaixo
+    if(matrix[row][col-1] == 1 && registers[row][col-1] == 0){
+        visitados++;
+        registers[row][col-1] = visitados;
+        deepSearch(matrix, registers, row, col-1); // Verifica pixel à esquerda
+    }
+
+    if(matrix[row+1][col] == 1 && registers[row+1][col] == 0){
+        visitados++;
+        registers[row+1][col] = visitados;
+        deepSearch(matrix, registers, row+1, col); // Verifica pixel acima
+    }
+
+    if(matrix[row-1][col] == 1 && registers[row-1][col] == 0){
+        visitados++;
+        registers[row-1][col] = visitados;
+        deepSearch(matrix, registers, row-1, col); // Verifica pixel abaixo
+    }
+
 }
 
 void deepSearchEight(int **matrix, int **registers, int row, int col){
