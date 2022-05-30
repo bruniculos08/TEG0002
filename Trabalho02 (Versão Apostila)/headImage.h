@@ -1,3 +1,4 @@
+typedef struct Componente componente;
 int **createMatrix(int *mainRows, int *mainCols);
 int **createRegister();
 void printMatrix(int **matrix);
