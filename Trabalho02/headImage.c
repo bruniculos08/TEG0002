@@ -83,10 +83,6 @@ int countComponents(int **matrix, int **registers){
 }
 
 void deepSearch(int **matrix, int **registers, int row, int col){
-    system("cls");
-    printMatrix(registers);
-    usleep(500000);
-    
 
     // (1) Se o pixel atual é um nó e ainda não foi visitado, registrar pixel atual como visitado.
     if(matrix[row][col] == 1 && registers[row][col] == 0) registers[row][col] = 1; 
@@ -94,12 +90,15 @@ void deepSearch(int **matrix, int **registers, int row, int col){
     // (2) Se o pixel atual não é um nó ou já foi visitado não iniciar busca.
     else if(matrix[row][col] == 0 || registers[row][col] == 1) return; 
 
-
-    deepSearch(matrix, registers, row+1, col); // Verifica pixel acima
-    deepSearch(matrix, registers, row-1, col); // Verifica pixel abaixo
+    system("cls");
+    printMatrix(registers);
+    usleep(500000);
 
     deepSearch(matrix, registers, row, col+1); // Verifica pixel à direita
     deepSearch(matrix, registers, row, col-1); // Verifica pixel à esquerda
+
+    deepSearch(matrix, registers, row+1, col); // Verifica pixel acima
+    deepSearch(matrix, registers, row-1, col); // Verifica pixel abaixo
 }
 
 void deepSearchEight(int **matrix, int **registers, int row, int col){
