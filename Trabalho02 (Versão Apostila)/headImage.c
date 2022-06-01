@@ -76,7 +76,6 @@ void printComponents(){
 
 int countComponents(int **matrix, int **registers){
     count = 0; 
-    visitados = 0;
     lista = NULL;
 
     for(int i=0; i<R; i++){
@@ -105,67 +104,140 @@ int countComponents(int **matrix, int **registers){
     return count;
 }
 
-void deepSearch(int **matrix, int **registers, int row, int col){
-    
+int countComponentsEight(int **matrix, int **registers)
+{
+    count = 0;
+    lista = NULL;
+
+    for (int i = 0; i < R; i++)
+    {
+        for (int j = 0; j < C; j++)
+        {
+            // (1) Se o pixel atual ainda não foi marcado então este pixel faz parte de um novo componente:
+            if (matrix[i][j] == 1 && registers[i][j] == 0)
+            {
+                if (lista == NULL)
+                    lista = (componente *)malloc(sizeof(componente));
+                else
+                    lista = realloc(lista, sizeof(componente) * (count + 1));
+                lista[count].baricentroX = 0;
+                lista[count].baricentroY = 0;
+                lista[count].numeroDePixels = 0;
+
+                // (1.1) Chamar busca em profundidade para marcar todos os pixels deste componente:
+                deepSearchEight(matrix, registers, i, j);
+                // (1.2) Adicionar 1 a quantidade de componentes encontrados:
+
+                lista[count].baricentroX = lista[count].baricentroX / lista[count].numeroDePixels - 1;
+                lista[count].baricentroY = lista[count].baricentroY / lista[count].numeroDePixels - 1;
+
+                count++;
+            }
+        }
+    }
+
+    return count;
+}
+
+void deepSearch(int **matrix, int **registers, int row, int col)
+{
+
     lista[count].baricentroX += col;
     lista[count].baricentroY += row;
     lista[count].numeroDePixels++;
 
     // (1) Se o pixel atual é um nó e ainda não foi visitado, registrar pixel atual como visitado.
-    if(matrix[row][col] == 1 && registers[row][col] == 0){
-        visitados++;
+    if (matrix[row][col] == 1 && registers[row][col] == 0)
+    {
         registers[row][col] = 1;
     }
 
     system("cls");
     printMatrix(registers);
     usleep(90000);
-    
+
     // (2) Se o pixel atual não é um nó ou já foi visitado não iniciar busca.
-    //else if(matrix[row][col] == 0 || registers[row][col] > 0) return; 
+    // else if(matrix[row][col] == 0 || registers[row][col] > 0) return;
 
-    if(matrix[row][col+1] == 1 && registers[row][col+1] == 0){
-        visitados++;
-        registers[row][col+1] = visitados;
-        deepSearch(matrix, registers, row, col+1); // Verifica pixel à direita
+    if (matrix[row][col + 1] == 1 && registers[row][col + 1] == 0)
+    {
+        deepSearch(matrix, registers, row, col + 1); // Verifica pixel à direita
     }
 
-    if(matrix[row][col-1] == 1 && registers[row][col-1] == 0){
-        visitados++;
-        registers[row][col-1] = visitados;
-        deepSearch(matrix, registers, row, col-1); // Verifica pixel à esquerda
+    if (matrix[row][col - 1] == 1 && registers[row][col - 1] == 0)
+    {
+        deepSearch(matrix, registers, row, col - 1); // Verifica pixel à esquerda
     }
 
-    if(matrix[row+1][col] == 1 && registers[row+1][col] == 0){
-        visitados++;
-        registers[row+1][col] = visitados;
-        deepSearch(matrix, registers, row+1, col); // Verifica pixel acima
+    if (matrix[row + 1][col] == 1 && registers[row + 1][col] == 0)
+    {
+        deepSearch(matrix, registers, row + 1, col); // Verifica pixel acima
     }
 
-    if(matrix[row-1][col] == 1 && registers[row-1][col] == 0){
-        visitados++;
-        registers[row-1][col] = visitados;
-        deepSearch(matrix, registers, row-1, col); // Verifica pixel abaixo
+    if (matrix[row - 1][col] == 1 && registers[row - 1][col] == 0)
+    {
+        deepSearch(matrix, registers, row - 1, col); // Verifica pixel abaixo
     }
-
 }
 
-void deepSearchEight(int **matrix, int **registers, int row, int col){
+void deepSearchEight(int **matrix, int **registers, int row, int col)
+{
 
+    lista[count].baricentroX += col;
+    lista[count].baricentroY += row;
+    lista[count].numeroDePixels++;
     // (1) Se o pixel atual é um nó e ainda não foi visitado, registrar pixel atual como visitado.
-    if(matrix[row][col] == 1 && registers[row][col] == 0) registers[row][col] = 1; 
-    
+    if (matrix[row][col] == 1 && registers[row][col] == 0)
+        registers[row][col] = 1;
+
     // (2) Se o pixel atual não é um nó ou já foi visitado não iniciar busca.
-    else if(matrix[row][col] == 0 || registers[row][col] == 1) return; 
     
-    deepSearchEight(matrix, registers, row+1, col); // Verifica pixel acima
-    deepSearchEight(matrix, registers, row-1, col); // Verifica pixel abaixo
+    system("cls");
+    printMatrix(registers);
+    usleep(90000);
     
-    deepSearchEight(matrix, registers, row+1, col+1); // Verifica pixel canto superior direito
-    deepSearchEight(matrix, registers, row-1, col+1); // Verifica pixel canto inferior direito
-    deepSearchEight(matrix, registers, row+1, col-1); // Verifica pixel canto superior esquerdo
-    deepSearchEight(matrix, registers, row-1, col-1); // Verifica pixel canto inferior esquerdo
-    
-    deepSearchEight(matrix, registers, row, col+1); // Verifica pixel à direita
-    deepSearchEight(matrix, registers, row, col-1); // Verifica pixel à esquerda
+    if (matrix[row + 1][col] == 1 && registers[row + 1][col] == 0)
+    {
+        deepSearchEight(matrix, registers, row + 1, col); // Verifica pixel acima
+    }
+    if (matrix[row - 1][col] == 1 && registers[row - 1][col] == 0)
+    {
+        deepSearchEight(matrix, registers, row - 1, col); // Verifica pixel abaixo
+    }
+    if (matrix[row + 1][col + 1] == 1 && registers[row + 1][col + 1] == 0)
+    {
+        deepSearchEight(matrix, registers, row + 1, col + 1); // Verifica pixel canto superior direito
+    }
+    if (matrix[row - 1][col + 1] == 1 && registers[row - 1][col + 1] == 0)
+    {
+        deepSearchEight(matrix, registers, row - 1, col + 1); // Verifica pixel canto inferior direito
+    }
+    if (matrix[row + 1][col - 1] == 1 && registers[row + 1][col - 1] == 0)
+    {
+        deepSearchEight(matrix, registers, row + 1, col - 1); // Verifica pixel canto superior esquerdo
+    }
+    if (matrix[row - 1][col - 1] == 1 && registers[row - 1][col - 1] == 0)
+    {
+        deepSearchEight(matrix, registers, row - 1, col - 1); // Verifica pixel canto inferior esquerdo
+    }
+    if (matrix[row][col + 1] == 1 && registers[row][col + 1] == 0)
+    {
+        deepSearchEight(matrix, registers, row, col + 1); // Verifica pixel à direita
+    }
+    if (matrix[row][col - 1] == 1 && registers[row][col - 1] == 0)
+    {
+        deepSearchEight(matrix, registers, row, col - 1); // Verifica pixel à esquerda
+    }
+}
+
+int **clearRegisterMatrix(int **registers){
+    //(1) Função sera utilizada para limpar a matriz que contém os nós visitados para que a função possa ser chamada mais de uma vez durante a execução do programa
+    for (int i = 0; i < R; i++)
+    {
+        for (int j = 0; j < C; j++)
+        {
+            registers[i][j] = 0;
+        }
+    }
+    return registers;
 }
